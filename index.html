@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – WMC Treasury</title>
+    <link rel="icon" type="image/png" href="Assets/logo.png"/>
+    <link rel="stylesheet" href="Styles/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/otpauth@9.3.6/dist/otpauth.umd.min.js"></script>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="login-container">
+        <div class="login-logo">
+            <img src="Assets/logo.png" alt="WMC Logo"/>
+        </div>
+        <h2>WMC Treasury</h2>
+        <p>Sign in with your WMC credentials</p>
+
+
+        <form class="login-form" id="loginForm">
+            <div class="input-group" id="credentialsGroup">
+                <div class="input-wrapper">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" autocomplete="username" required>
+                </div>
+                <div class="input-wrapper">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
+                </div>
+            </div>
+            <div class="input-group hidden" id="twoFaGroup">
+                <label for="totpCode">Enter 6-Digit Code</label>
+                <input type="text" id="totpCode" name="totpCode" maxlength="6" pattern="[0-9]{6}" autocomplete="off" class="code-input">
+                <p class="helper-text">Enter the code from your authenticator app</p>
+            </div>
+            <div class="login-error hidden" id="loginError"></div>
+            <button type="submit" class="login-btn" id="loginBtn">Login</button>
+            <button type="button" class="login-btn-secondary hidden" id="backBtn" onclick="resetLogin()">Back to Login</button>
+        </form>
+    </div>
+
+    <script src="Script/login.js"></script>
+</body>
+</html>

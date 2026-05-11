@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Churches | WMC Treasury</title>
+  <link rel="icon" type="image/png" href="../Assets/logo.png"/>
+  <link rel="stylesheet" href="../Styles/Churches.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <script>
+    if (!sessionStorage.getItem('wmc_user')) location.replace('../index.html');
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'wmc_logout') { sessionStorage.removeItem('wmc_user'); location.replace('../index.html'); }
+    });
+  </script>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+
+  <header class="churches-header">
+    <div class="logo-area">
+      <img src="../Assets/logo.png" alt="Logo" class="logo-img"/>
+      <div class="org-name">
+        <strong>Southwestern Philippines</strong> Union Conference
+      </div>
+    </div>
+    <h1 class="churches-title">CHURCHES DATA</h1>
+  </header>
+
+  <main class="churches-main">
+    <div class="table-section">
+      <div class="table-tabs">
+        <button class="table-tab active" id="tabTithes" onclick="setTableTab('tithes')">&#128203; TITHES</button>
+        <button class="table-tab" id="tabOfferings" onclick="setTableTab('offerings')">&#128591; OFFERINGS</button>
+      </div>
+
+      <div class="table-content active" id="tithesTableWrap">
+        <div class="table-scroll-wrap">
+          <table class="wmc-data-table">
+            <thead>
+              <tr class="title-row-main">
+                <th colspan="2"></th>
+                <th colspan="4">TITHE FROM CHURCHES &mdash; as of January 2026</th>
+                <th># of Churches</th>
+              </tr>
+              <tr>
+                <th>#</th>
+                <th>DISTRICT</th>
+                <th>2026</th>
+                <th>2025</th>
+                <th>Variance</th>
+                <th>%</th>
+                <th>Churches</th>
+              </tr>
+            </thead>
+            <tbody id="tithesTableBody"></tbody>
+            <tfoot>
+              <tr class="summary-sub-row">
+                <td colspan="2">Tithe from Churches</td>
+                <td>9,825,342.95</td>
+                <td>11,693,864.40</td>
+                <td class="neg">(1,868,521.45)</td>
+                <td class="neg">(16%)</td>
+                <td></td>
+              </tr>
+              <tr class="summary-sub-row">
+                <td colspan="2">Tithe from Workers</td>
+                <td>302,733.70</td>
+                <td>786,773.40</td>
+                <td class="neg">(484,039.70)</td>
+                <td class="neg">(62%)</td>
+                <td></td>
+              </tr>
+              <tr class="summary-sub-row">
+                <td colspan="2">Tithe from LES</td>
+                <td>0.00</td>
+                <td>5,359.19</td>
+                <td class="neg">(5,359.19)</td>
+                <td class="neg">(100%)</td>
+                <td></td>
+              </tr>
+              <tr class="summary-sub-row">
+                <td colspan="2">Tithe from Outside</td>
+                <td>534,525.00</td>
+                <td>349,095.56</td>
+                <td class="pos">185,429.44</td>
+                <td class="pos">53%</td>
+                <td></td>
+              </tr>
+              <tr class="tfoot-total">
+                <td colspan="2">TOTAL TITHE INCOME</td>
+                <td>10,662,601.65</td>
+                <td>12,835,092.55</td>
+                <td class="neg">(2,172,490.90)</td>
+                <td class="neg">(17%)</td>
+                <td>337</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-content" id="offeringsTableWrap">
+        <div class="table-scroll-wrap">
+          <table class="wmc-data-table wmc-offering-table">
+            <thead>
+              <tr class="title-row-main">
+                <th colspan="2"></th>
+                <th colspan="4">OFFERINGS FROM CHURCHES &mdash; as of January 2026</th>
+              </tr>
+              <tr>
+                <th>#</th>
+                <th>DISTRICT</th>
+                <th>2026</th>
+                <th>2025</th>
+                <th>Variance</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody id="offeringsTableBody"></tbody>
+            <tfoot>
+              <tr class="summary-sub-row">
+                <td colspan="2">Offerings from Churches</td>
+                <td>2,094,824.13</td>
+                <td>3,074,187.05</td>
+                <td class="neg">(979,362.92)</td>
+                <td class="neg">-32%</td>
+              </tr>
+              <tr class="tfoot-total">
+                <td colspan="2">TOTAL OFFERINGS</td>
+                <td>2,094,824.13</td>
+                <td>3,074,187.05</td>
+                <td class="neg">(979,362.92)</td>
+                <td class="neg">-32%</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="bottom-nav-btn" onclick="location.href='Dashboard.html'">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="bottom-nav-btn active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span>Churches</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="location.href='Settings.html'">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Settings</span>
+    </button>
+  </nav>
+
+  <div class="church-modal-overlay hidden" id="churchModalOverlay" onclick="closeChurchModal()"></div>
+  <div class="church-modal hidden" id="churchModal">
+    <div class="church-modal-header">
+      <div>
+        <span class="church-modal-title" id="churchModalTitle">District Profile</span>
+        <p class="church-modal-subtitle" id="churchModalSubtitle">0 churches</p>
+      </div>
+      <button class="church-modal-close" onclick="closeChurchModal()">&#10005;</button>
+    </div>
+    <div class="church-modal-body">
+      <div class="church-profile-strip">
+        <div class="church-profile-avatar" id="churchProfileAvatar">D</div>
+        <div class="church-profile-meta">
+          <p class="church-profile-label">District</p>
+          <p class="church-profile-name" id="churchProfileName">-</p>
+        </div>
+      </div>
+      <div class="church-modal-tabs">
+        <button class="church-modal-tab active" id="churchModalTabTithes" onclick="setChurchModalTab('tithes')">Tithes</button>
+        <button class="church-modal-tab" id="churchModalTabOfferings" onclick="setChurchModalTab('offerings')">Offerings</button>
+      </div>
+      <div class="church-modal-table-wrap">
+        <table class="church-modal-data-table" id="churchModalTable">
+          <thead>
+            <tr>
+              <th>Church</th>
+              <th>2025</th>
+              <th>2026</th>
+              <th>Variance %</th>
+              <th>Inc/Dec vs Prev Yr</th>
+            </tr>
+          </thead>
+          <tbody id="churchModalTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="../Script/Churches.js"></script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;800;900&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 40%, #1e88e5 70%, #42a5f5 100%);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 72px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  pointer-events: none;
+  z-index: 0;
+}
+.blob-1 { width: 420px; height: 420px; top: -140px; left: -120px; }
+.blob-2 { width: 300px; height: 300px; bottom: -80px; right: -80px; }
+.blob-3 { width: 180px; height: 180px; top: 45%;   left: 6%; }
+.blob-4 { width: 120px; height: 120px; top: 15%;   right: 10%; }
+
+.churches-header {
+  position: relative;
+  z-index: 2;
+  padding: 16px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.logo-area { display: flex; align-items: center; gap: 12px; }
+.logo-img { width: 44px; height: 44px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.25)); }
+.org-name { font-size: 0.8rem; line-height: 1.4; color: rgba(255,255,255,0.85); }
+.org-name strong { font-weight: 700; font-size: 0.9rem; display: block; color: #fff; }
+
+.churches-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+.churches-main {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.table-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.4);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.table-tabs {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #c6d4e8;
+}
+
+.table-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #b8c8e0;
+  background: linear-gradient(135deg, #e8edf8, #dde5f5);
+  color: #1e3a8a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 9px 22px;
+  cursor: pointer;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.table-tab:hover {
+  background: linear-gradient(135deg, #d0daf5, #c5d2f0);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(30,58,138,0.2);
+}
+
+.table-tab.active {
+  background: linear-gradient(135deg, #1a237e, #0f1e5c);
+  color: #f5a623;
+  border-color: rgba(245,166,35,0.5);
+  box-shadow: 0 4px 16px rgba(10,30,110,0.4), 0 0 12px rgba(245,166,35,0.2);
+  transform: translateY(-1px);
+}
+
+.table-content { display: none; flex: 1; min-height: 0; flex-direction: column; }
+.table-content.active { display: flex; }
+
+.table-scroll-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid #c6cdd9;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.table-scroll-wrap::-webkit-scrollbar { width: 8px; height: 8px; }
+.table-scroll-wrap::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+.table-scroll-wrap::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+.table-scroll-wrap::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+.wmc-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #111827;
+  font-size: 0.88rem;
+  background: #ffffff;
+  table-layout: auto;
+}
+
+.wmc-data-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #1a237e;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 12px 16px;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.wmc-data-table thead .title-row-main th {
+  background: linear-gradient(135deg, #0a1e6e, #1a237e);
+  color: #f5a623;
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #f5a623;
+  padding: 12px 16px;
+}
+
+.wmc-data-table thead .title-row-main th:first-child {
+  background: #0a1e6e;
+  color: transparent;
+}
+
+.wmc-data-table thead tr:not(.title-row-main) th {
+  background: #2e3f8f;
+  font-size: 0.76rem;
+  top: 45px;
+}
+
+.wmc-data-table.wmc-offering-table thead .title-row-main th {
+  background: linear-gradient(135deg, #7a4500, #b45309);
+  color: #fff8ed;
+  border-bottom-color: #f5a623;
+}
+
+.wmc-data-table.wmc-offering-table thead tr:not(.title-row-main) th {
+  background: #92400e;
+}
+
+.wmc-data-table thead tr:not(.title-row-main) th:nth-child(2) { text-align: left; }
+
+.wmc-data-table td {
+  border: 1px solid #dde3f0;
+  padding: 10px 16px;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 0.86rem;
+  vertical-align: middle;
+}
+
+.wmc-data-table td:first-child {
+  text-align: center;
+  width: 40px;
+  font-weight: 700;
+  color: #64748b;
+  background: #f8fafc !important;
+}
+
+.wmc-data-table .district {
+  text-align: left;
+  font-weight: 700;
+  color: #1e3a8a;
+  background: #f0f4ff !important;
+  padding-left: 14px;
+  min-width: 160px;
+}
+
+.wmc-data-table tbody tr:nth-child(odd)  td { background: #f8fbf5; }
+.wmc-data-table tbody tr:nth-child(even) td { background: #edf5e6; }
+.wmc-data-table tbody tr:hover td {
+  background: #dbeafe !important;
+  color: #1e3a8a;
+  transition: background 0.15s;
+}
+
+.wmc-data-table tfoot td {
+  font-weight: 700;
+  border: 1px solid #b9c8e0;
+  padding: 10px 16px;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 0.86rem;
+}
+
+.wmc-data-table tfoot td:first-child,
+.wmc-data-table tfoot td:nth-child(2) { text-align: left; }
+
+.wmc-data-table tfoot .summary-sub-row td {
+  background: #f0f4ff;
+  color: #1e3a8a;
+  font-weight: 600;
+  font-size: 0.84rem;
+  border-color: #c5d2f0;
+}
+
+.wmc-data-table tfoot .tfoot-total td {
+  background: linear-gradient(90deg, #1a237e, #2e3f8f);
+  color: #f5a623;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 0.84rem;
+  letter-spacing: 0.5px;
+  border-color: rgba(245,166,35,0.4);
+  border-top: 2px solid #f5a623;
+}
+
+.wmc-data-table tfoot .tfoot-total td.neg,
+.wmc-data-table tfoot .tfoot-total td.pos {
+  color: #ffe082;
+}
+
+.church-count-btn {
+  border: 1px solid #3b82f6;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1d4ed8;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+.church-count-btn:hover {
+  background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+  transform: scale(1.1);
+  box-shadow: 0 2px 10px rgba(59,130,246,0.35);
+}
+
+.neg { color: #dc2626 !important; font-weight: 700; }
+.pos { color: #15803d !important; font-weight: 700; }
+
+.church-modal {
+  position: fixed;
+  z-index: 251;
+  width: min(760px, 94vw);
+  max-height: 80vh;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.church-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(3,10,35,0.7);
+  backdrop-filter: blur(5px);
+}
+
+.church-modal.hidden,
+.church-modal-overlay.hidden {
+  display: none;
+}
+
+.church-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0a1e6e, #1a237e);
+}
+
+.church-modal-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+
+.church-modal-subtitle {
+  margin-top: 3px;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.7px;
+}
+
+.church-modal-close {
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+.church-modal-close:hover { background: rgba(255,255,255,0.2); }
+
+.church-modal-body {
+  padding: 14px 16px 16px;
+  max-height: calc(80vh - 60px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.church-profile-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #eef3ff, #e8efff);
+  border: 1px solid #d3def7;
+  border-radius: 12px;
+}
+
+.church-profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a237e, #2e3f8f);
+  color: #f5c24d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.church-profile-label {
+  font-size: 0.7rem;
+  color: #64748b;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.church-profile-name {
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  color: #10274a;
+  margin-top: 2px;
+}
+
+.church-modal-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.church-modal-tab {
+  border: 1px solid #b8c8e0;
+  background: linear-gradient(135deg, #e8edf8, #dde5f5);
+  color: #1e3a8a;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.church-modal-tab.active {
+  background: linear-gradient(135deg, #1a237e, #0f1e5c);
+  color: #f5a623;
+  border-color: rgba(245,166,35,0.5);
+}
+
+.church-modal-table-wrap {
+  border: 1px solid #cdd8eb;
+  border-radius: 10px;
+  overflow: auto;
+  max-height: 50vh;
+  box-shadow: inset 0 2px 10px rgba(15,23,42,0.06);
+}
+
+.church-modal-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #0f172a;
+  font-size: 0.76rem;
+}
+
+.church-modal-data-table th {
+  position: sticky;
+  top: 0;
+  background: #1a237e;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.14);
+  padding: 8px 10px;
+  text-align: right;
+  white-space: nowrap;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.7px;
+}
+
+.church-modal-data-table th:first-child {
+  text-align: left;
+}
+
+.church-modal-data-table td {
+  border: 1px solid #e2e8f0;
+  padding: 6px 10px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.church-modal-data-table tr:nth-child(odd) td {
+  background: #f8fafc;
+}
+
+.church-modal-data-table tr:nth-child(even) td {
+  background: #f1f5f9;
+}
+
+.church-name-cell {
+  text-align: left !important;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 300;
+  height: 64px;
+  background: rgba(10,30,110,0.85);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+}
+
+.bottom-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 10px;
+  transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+.bottom-nav-btn svg { transition: stroke 0.2s, filter 0.2s; }
+.bottom-nav-btn:hover,
+.bottom-nav-btn.active {
+  color: #fff;
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+.bottom-nav-btn:hover svg,
+.bottom-nav-btn.active svg {
+  stroke: #fff;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.5));
+}
+
+.hidden { display: none !important; }

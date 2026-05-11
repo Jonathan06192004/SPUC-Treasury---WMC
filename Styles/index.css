@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800;900&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 40%, #1e88e5 70%, #42a5f5 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Decorative blobs */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+body::before {
+  width: 420px; height: 420px;
+  top: -120px; left: -100px;
+}
+body::after {
+  width: 320px; height: 320px;
+  bottom: -80px; right: -80px;
+}
+
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  pointer-events: none;
+  z-index: 0;
+}
+.blob-1 { width: 200px; height: 200px; bottom: 80px; left: 60px; }
+.blob-2 { width: 140px; height: 140px; top: 100px; right: 120px; }
+.blob-3 { width: 90px;  height: 90px;  top: 50%;   left: 8%;    }
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 40px 36px 32px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  width: 100%;
+  max-width: 360px;
+  border: 1px solid rgba(255,255,255,0.3);
+  text-align: center;
+}
+
+.login-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.login-logo img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+h2 {
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+p {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.78rem;
+  margin-bottom: 28px;
+}
+
+.input-group { text-align: left; transition: all 0.3s ease; }
+
+.input-wrapper { margin-bottom: 16px; }
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.4px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.input-group input::placeholder { color: rgba(255,255,255,0.5); }
+
+.input-group input:focus {
+  border-color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+}
+
+.code-input {
+  text-align: center;
+  letter-spacing: 8px;
+  font-size: 1.2rem !important;
+  font-weight: 700;
+  font-family: 'Courier New', monospace !important;
+}
+
+.helper-text {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.6);
+  margin-top: 6px;
+  text-align: center;
+}
+
+.login-error {
+  background: rgba(220,38,38,0.25);
+  border: 1px solid rgba(252,165,165,0.5);
+  color: #fecaca;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.login-error.hidden { display: none; }
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  color: #1565c0;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+  margin-top: 4px;
+}
+
+.login-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); background: #f0f4ff; }
+.login-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+.login-btn-secondary {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: 8px;
+}
+.login-btn-secondary:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.5); }
+
+.hidden { display: none !important; }
