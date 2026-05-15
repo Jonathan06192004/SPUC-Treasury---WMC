@@ -12,11 +12,3 @@ function updateSideClock() {
     `<div class="side-clock-time">${hh}:${mm}:${ss} <span class="side-clock-ampm">${ampm}</span></div>
      <div class="side-clock-date">${date}</div>`;
 }
-
-// ─── CROSS-TAB LOGOUT ─────────────────────────────────────────────────────────
-window.addEventListener('storage', (e) => {
-  if (e.key === 'wmc_logout') {
-    sessionStorage.removeItem('wmc_user');
-    location.replace('../index.html');
-  }
-});
